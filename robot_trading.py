@@ -21,46 +21,47 @@ def importar_base_bitcoin():
   # Declarando las variables globales del proyecto
   global df_bitcoin, precio_actual, tendencia, media_bitcoin, algoritmo_decision
   
-  # Variable con
+  # Variable con transaccion a buscar
   symbol = 'BTC-USD'
   
-  #
+  # Variable con la fecha actual, que es donde finaliza el periodo
   end_date = datetime.datetime.now()
   
-  #
+  # Variable con la fecha inicial de periodo, que esta dado por la fecha actual menos el periodo a analizar, en este caso 7 dias
   start_date = end_date - datetime.timedelta(days = 7)
   
-  #
+  # Variable con el intervalo de cada cuanto se extrae la informacion  
   interval = '5m'
   
-  #
+  # Variable df_bitcoin con el dataset obtenido desde la libreria yfinance
   df_bitcoin  = yf.download(symbol,start = start_date, end = end_date, interval = interval)
   
-  #
+  # Reasignando el indice al DataFrame
   df_bitcoin.reset_index(inplace = True)
   
-  #
+  # Retorno de la funcion
   return df_bitcoin 
 
-#
+# Funcion que gestiona el nombre de las columnas para tener un mismo formato (snake_case)
 
 def nombre_columnas():
-  #
+  # Asignando una lista vacia a la variable
   df_columns = []
   
-  #
+  # Bucle for para ingresar cada nombre de columna 
   for name in df_bitcoin.columns:
-    #
+    # Modificando el  nombre, a formato snake_case
     df_columns.append(name.lower().replace(' ','_').strip())
-  #
+  
+  # Asignando los nuevos nombres de columnas
   df_bitcoin.columns = df_columns  
-  #
+  
+  # Retorno de la funcion
   return df_bitcoin
 
-#
+# Funcion para mejorar el codigo obtenido desde la pagina, reemplazando caracteres y elimimnando espacios
 
 def trata_html(input):
-  #
   return ' '.join(input.split()).replace('> <', '><')
 
 # Funcion que extrae las tendencias del mercado desde la pagina coinmarketcap.com
@@ -75,10 +76,10 @@ def extraer_tendencias():
   # Asignando a variable url el nombre de la pagina web
   url = 'https://coinmarketcap.com/'
   
-  #
+  # Asignando los encaebezados de la pagina a la variable headers
   headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36'}
   
-  #
+  # Metodo try-except que en caso de error, indica que tipo de error
   try:
     req = Request(url, headers = headers)
     response = urlopen(req)
@@ -90,45 +91,40 @@ def extraer_tendencias():
   except URLError as e:
     print(e.reason)
   
-  # 
+  # Aplicando funcion trata_html
   trata_html(html)
   
-  #
+  # Asignando codigo de pagina a la variable soup
   soup = BeautifulSoup(html,'lxml')
   
-  #
+  # Bucle for para encontrar 'BTC' en la lista de transacciones de la pagina
   for p in soup.find_all('p',{'class':'sc-71024e3e-0 OqPKt coin-item-symbol'}):
     
-    #
+    # Verificando si el parrafo tiene la digla 'BTC'
     if p.get_text() == 'BTC':
-      
-      #
+
+      # Guardando variable con el precio actual del bitcoin que entrega la pagina
       precio_actual = soup.find('div', {'class':['sc-b3fc6b7-0 dzgUIj','sc-b3fc6b7-0 dzgUIj fall','sc-b3fc6b7-0 dzgUIj rise']})
       precio_actual = float(precio_actual.get_text().replace('$','').replace(',', ''))
   
-      #
+      # Guardando el valor de la tendencia que entrega la pagina
       tendencia_porcentaje = float(soup.find('span', {'class':'sc-a59753b0-0 ivvJzO'}).get_text().replace('%',''))
 
-      #
+      # Sentencia condicional if-elif-else para asignar los criterios de tendencia segun el procentaje obtenido
       if tendencia_porcentaje > 0:
         tendencia = 'alta'
-      
-      #
       elif tendencia_porcentaje == 0:
         tendencia = 'neutro'
-      
-      #
       else:
         tendencia = 'baja'
       break
     
-    #
     else:
-      #
+      # Mensaje en caso de no estar la transaccion en el listado principal de la pagina
       print('La transaccion no se encuentra en la tabla principal')
       break      
   
-  #
+  # Retorno de la funcion
   return precio_actual, tendencia
 
 # Funcion para limpiar DF obtenido por la libreria yfinance 
@@ -233,7 +229,7 @@ def visualizacion():
 
 while(True):
   
-  #
+  # Funcion que elimina los resultados anteriores para poder emitir uno nuevo
   clear_output()
   
   importar_base_bitcoin()
@@ -241,6 +237,6 @@ while(True):
   limpieza_datos()
   tomar_decisiones()
   visualizacion()
-  
-  #
+   
+  # Funcion que permite automatizar el software, ya que mide tiempo para que se ejecute el software nuevamente
   time.sleep(300)
