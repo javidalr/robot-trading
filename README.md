@@ -10,6 +10,7 @@ Por ultimo, el proyecto genera un grafico con la decision del software, y esta a
 
 ## **Librerias utilizadas**
 
+<<<<<<< HEAD
 import pandas as pd <br>
 import numpy as np <br>
 import matplotlib.pyplot as plt <br>
@@ -22,3 +23,17 @@ from urllib.request import Request, urlopen <br>
 from urllib.error import URLError, HTTPError <br>
 from IPython.display import clear_output <br>
 import time <br>
+=======
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns 
+import yfinance as yf
+import datetime
+import warnings
+from bs4 import BeautifulSoup
+from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
+from IPython.display import clear_output
+import timegit a
+>>>>>>> 27806c8e6404c036329703717071810a51b3c115
