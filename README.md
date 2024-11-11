@@ -10,7 +10,7 @@ Por ultimo, el proyecto genera un grafico con la decision del software, y esta a
 
 ## **Librerias utilizadas**
 
-<<<<<<< HEAD
+
 import pandas as pd <br>
 import numpy as np <br>
 import matplotlib.pyplot as plt <br>
@@ -23,32 +23,3 @@ from urllib.request import Request, urlopen <br>
 from urllib.error import URLError, HTTPError <br>
 from IPython.display import clear_output <br>
 import time <br>
-=======
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns 
-import yfinance as yf
-import datetime
-import warnings
-from bs4 import BeautifulSoup
-from urllib.request import Request, urlopen
-from urllib.error import URLError, HTTPError
-from IPython.display import clear_output
-import timegit a
-
-# Repositorio de Proyectos
-
-En este repositorio se encuentran proyectos organizados por áreas y con enlaces directos a cada rama.
-
-| Área     | Proyecto        | Enlace a la Rama                          |
-|----------|------------------|-------------------------------------------|
-| Minería  | Proyecto 1       | [mineria/proyecto1](https://github.com/tu-usuario/Proyectos/tree/mineria/proyecto1) |
-| Deporte  | Proyecto 1       | [deporte/proyecto1](https://github.com/tu-usuario/Proyectos/tree/deporte/proyecto1) |
-| Agrícola | Proyecto 1       | [agricola/proyecto1](https://github.com/tu-usuario/Proyectos/tree/agricola/proyecto1) |
-| Finanzas | Proyecto 1       | [finanzas/proyecto1](https://github.com/tu-usuario/Proyectos/tree/finanzas/proyecto1) |
-| Minería  | Proyecto 2       | [mineria/proyecto2](https://github.com/tu-usuario/Proyectos/tree/mineria/proyecto2) |
-| Deporte  | Proyecto 2       | [deporte/proyecto2](https://github.com/tu-usuario/Proyectos/tree/deporte/proyecto2) |
-
-
->>>>>>> 27806c8e6404c036329703717071810a51b3c115
