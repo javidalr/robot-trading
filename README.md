@@ -22,4 +22,4 @@ from bs4 import BeautifulSoup <br>
 from urllib.request import Request, urlopen <br>
 from urllib.error import URLError, HTTPError <br>
 from IPython.display import clear_output <br>
-import time <br>
+import time  <br>
